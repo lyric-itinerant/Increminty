@@ -6,21 +6,27 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+import java.lang.reflect.Array;
 import java.util.Scanner;
+
 public class IncremintyMain {
 	public static void main(String[] args) {
 
-		//here's our scanner
+		// declare scanner
 		Scanner scnr = new Scanner(System.in);
 
-		//variables
+		// variables
 		String userEntry = "";
+		// initialize user input to the empty string
 		boolean wentThroughAlphabetLoop = false;
+		// returns true if userEntry contains alphabetic character(s)
+		int [] integerArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+		// array to make sure userEntry has no special character(s)
 
 		// user prompt 
 		System.out.println("Please enter an integer:"); 
 
-		// user input
+		// Store user input
 		userEntry = scnr.nextLine();
 
 		// error for no input
@@ -68,6 +74,21 @@ public class IncremintyMain {
 				// we went through the loop
 				wentThroughAlphabetLoop = true;
 			}
+			//TODO: This buggy crap
+
+			// if entry doesn't contain letters, check for special symbols
+			// loop through int array to check if userInput contains only ints
+			if (wentThroughAlphabetLoop == false) {
+					for (int k = 0; k < integerArray.length; k++) { 
+						for (int j = 0; j < userEntry.length(); j++) { 
+						if (userEntry.charAt(i) != integerArray[k]) { 
+							System.out.println("No special characters "
+									+ "are allowed. Goodbye. ");
+							System.exit(0);
+						}
+					}
+				}
+			}
 		}
 
 		// echo user input
@@ -83,15 +104,24 @@ public class IncremintyMain {
 
 		}
 		// print out if number is odd
-		else if (userEntry.codePointAt(0) > 0 && !wentThroughAlphabetLoop) {
+		else if (userEntry.codePointAt(0) > 0 && !wentThroughAlphabetLoop 
+				&& !userEntry.contains(".")) {
 			System.out.println("We see you've enterented "
 					+ "a nonnegative number. ");
 
 		} 
+		// print out if user entered a double
+		if (userEntry.contains(".") && !wentThroughAlphabetLoop) {
+			Scanner parseStuff = new Scanner(userEntry);
+			if (parseStuff.hasNextDouble()) { 
+				System.out.println("You have entered a decimal value. Your "
+						+ "value will be rounded up to the next "
+						+ "highest integer. "); 
+				parseStuff.close();
+			}
+
+		}
 		scnr.close();
 	} 
 
 }
-
-
-
