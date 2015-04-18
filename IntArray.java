@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////
+//						MADHACKS 2015
+//			Main Class:		 IncremintyMain.java
+//			This File: 		 IntArray.java
+//			Hackers: 		Jessie Demers && Megan Tanksley
+//
+///////////////////////////////////////////////////////////////////////////////
+
 public class IntArray {
 
 	//variables
@@ -86,11 +94,11 @@ public class IntArray {
 			intArray[0] = -1;
 		}
 
-
+		/* For testing purposes - this will print the array
 		for (int i = 0; i < intArray.length; i++) {
 			System.out.print(" [" + intArray[i] + "] ");
 		}
-
+		 */
 	}
 
 
