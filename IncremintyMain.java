@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //						MADHACKS 2015
 //			Main Class:		 IncremintyMain.java
-//			This File: 		 IntArray.java
+//			This File: 		 IntArray.java, ReCurses.java
 //			Hackers: 		Jessie Demers && Megan Tanksley
 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -74,23 +74,8 @@ public class IncremintyMain {
 				// we went through the loop
 				wentThroughAlphabetLoop = true;
 			}
-			//TODO: This buggy crap
-
-			// if entry doesn't contain letters, check for special symbols
-			// loop through int array to check if userInput contains only ints
-			if (wentThroughAlphabetLoop == false) {
-					for (int k = 0; k < integerArray.length; k++) { 
-						for (int j = 0; j < userEntry.length(); j++) { 
-						if (userEntry.charAt(i) != integerArray[k]) { 
-							System.out.println("No special characters "
-									+ "are allowed. Goodbye. ");
-							System.exit(0);
-						}
-					}
-				}
-			}
 		}
-
+	
 		// echo user input
 		if (!userEntry.isEmpty() && !wentThroughAlphabetLoop) {
 			System.out.println("You entered: " + userEntry);
@@ -98,15 +83,15 @@ public class IncremintyMain {
 
 		// parse into int, if int is in input
 
-		// print out if number is even
+		// print out if number is negative
 		if (userEntry.charAt(0) == '-' && !wentThroughAlphabetLoop) { 
 			System.out.println("We see you've entered a negative number. ");
 
 		}
-		// print out if number is odd
+		// print out if number is positive
 		else if (userEntry.codePointAt(0) > 0 && !wentThroughAlphabetLoop 
 				&& !userEntry.contains(".")) {
-			System.out.println("We see you've enterented "
+			System.out.println("We see you've entered "
 					+ "a nonnegative number. ");
 
 		} 
@@ -121,7 +106,6 @@ public class IncremintyMain {
 			}
 
 		}
-		scnr.close();
-	} 
-
+	}
 }
+
