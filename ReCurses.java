@@ -22,7 +22,7 @@ public class ReCurses {
 	}
 	
 	//if number is negative, use ReCurseNeg instead
-	public int ReCurseNeg(int number) {
+	public static int ReCurseNeg(int number) {
 		number = number * -1;
 		return -1 * ReCurse(number);
 	}
