@@ -95,8 +95,8 @@ public class IncremintyMain {
 				}
 				// if no decimal input 
 				// unreachable
-				else {
-				intInput = (int) parseNegative.nextDouble(); 
+				else if (parseNegative.hasNextInt()) {
+				intInput = parseNegative.nextInt(); 
 				System.out.println(intInput);
 				}
 				parseNegative.close();
