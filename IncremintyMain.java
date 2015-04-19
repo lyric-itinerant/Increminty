@@ -1,13 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 //						MADHACKS 2015
 //			Main Class:		 IncremintyMain.java
-//			This File: 		 IntArray.java, ReCurses.java,
-//						 Stringify.java
+//			This File: 		 IntArray.java, ReCurses.java
 //			Hackers: 		Jessie Demers && Megan Tanksley
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class IncremintyMain {
@@ -18,11 +16,13 @@ public class IncremintyMain {
 
 		// variables
 		String userEntry = "";
-		// initialize user input to the empty string
+			// initialize user input to the empty string
 		boolean wentThroughAlphabetLoop = false;
-		// returns true if userEntry contains alphabetic character(s)
-		int [] integerArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-		// array to make sure userEntry has no special character(s)
+			// returns true if userEntry contains alphabetic character(s)
+		int intInput = 0; 
+			// the input of the user, converted to an integer
+		boolean wentThroughNegativeLoop = false;
+		double doubleInput = 0;
 
 		// user prompt 
 		System.out.println("Please enter an integer:"); 
@@ -82,31 +82,67 @@ public class IncremintyMain {
 			System.out.println("You entered: " + userEntry);
 		}
 
-		// parse into int, if int is in input
-
-		// print out if number is negative
+		// print out if number is negative; intInput is the result
 		if (userEntry.charAt(0) == '-' && !wentThroughAlphabetLoop) { 
 			System.out.println("We see you've entered a negative number. ");
-
+			Scanner parseNegative = new Scanner(userEntry);
+			if (parseNegative.hasNextDouble()) {
+				// in case of decimal inputs
+				if (userEntry.charAt(0) == '-') {
+					doubleInput = parseNegative.nextDouble();
+					wentThroughNegativeLoop = true; 
+					intInput = (int) doubleInput;
+				}
+				// if no decimal input 
+				// unreachable
+				else {
+				intInput = (int) parseNegative.nextDouble(); 
+				System.out.println(intInput);
+				}
+				parseNegative.close();
+			}
+			else {
+				System.out.println("Something went wrong... we think it was"
+						+ " the sloths. Please try again. Goodbye!");
+			}
 		}
-		// print out if number is positive
+		// print out if number is positive; intInput is the result
 		else if (userEntry.codePointAt(0) > 0 && !wentThroughAlphabetLoop 
 				&& !userEntry.contains(".")) {
 			System.out.println("We see you've entered "
 					+ "a nonnegative number. ");
-
+			Scanner parsePositive = new Scanner (userEntry);
+			if (parsePositive.hasNextInt()) {
+				intInput = parsePositive.nextInt(); 
+			}
+			else {
+				System.out.println("Something went wrong... we think it was "
+						+ "the monkeys. Please try again. Goodbye!");
+				System.exit(0);
+			}
+			parsePositive.close();
 		} 
-		// print out if user entered a double
+		// print out if user entered a double; intInput is result
 		if (userEntry.contains(".") && !wentThroughAlphabetLoop) {
 			Scanner parseStuff = new Scanner(userEntry);
 			if (parseStuff.hasNextDouble()) { 
 				System.out.println("You have entered a decimal value. Your "
 						+ "value will be rounded up to the next "
-						+ "highest integer. "); 
-				parseStuff.close();
+						+ "highest integer. ");
+				if (wentThroughNegativeLoop = true) {
+					doubleInput-=1; 
+					intInput = ((int) doubleInput + 1);
+					System.out.println("Your number is: "+ intInput);
+				}
+				else {
+				doubleInput = parseStuff.nextDouble();
+				intInput = ((int) doubleInput + 1);
+				System.out.println("Your number is: "+ intInput);
+				}
+				parseStuff.close(); 
 			}
-
-		}
-	}
+			
+		} System.out.println("Your number incremented by 1 is: " + intInput);
+		scnr.close();
+	} 
 }
-
