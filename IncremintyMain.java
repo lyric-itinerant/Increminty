@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //						MADHACKS 2015
 //			Main Class:		 IncremintyMain.java
-//			This File: 		 IntArray.java, ReCurses.java
+//			This File: 		 IntArray.java, ReCurses.java, Stringify.java
 //			Hackers: 		Jessie Demers && Megan Tanksley
 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,13 +16,15 @@ public class IncremintyMain {
 
 		// variables
 		String userEntry = "";
-			// initialize user input to the empty string
+		// initialize user input to the empty string
 		boolean wentThroughAlphabetLoop = false;
-			// returns true if userEntry contains alphabetic character(s)
+		// returns true if userEntry contains alphabetic character(s)
 		int intInput = 0; 
-			// the input of the user, converted to an integer
+		// the input of the user, converted to an integer
 		boolean wentThroughNegativeLoop = false;
 		double doubleInput = 0;
+		int newNumber;
+		String endResult;
 
 		// user prompt 
 		System.out.println("Please enter an integer:"); 
@@ -76,7 +78,7 @@ public class IncremintyMain {
 				wentThroughAlphabetLoop = true;
 			}
 		}
-	
+
 		// echo user input
 		if (!userEntry.isEmpty() && !wentThroughAlphabetLoop) {
 			System.out.println("You entered: " + userEntry);
@@ -96,8 +98,8 @@ public class IncremintyMain {
 				// if no decimal input 
 				// unreachable
 				else if (parseNegative.hasNextInt()) {
-				intInput = parseNegative.nextInt(); 
-				System.out.println(intInput);
+					intInput = parseNegative.nextInt(); 
+					System.out.println(intInput);
 				}
 				parseNegative.close();
 			}
@@ -135,14 +137,27 @@ public class IncremintyMain {
 					System.out.println("Your number is: "+ intInput);
 				}
 				else {
-				doubleInput = parseStuff.nextDouble();
-				intInput = ((int) doubleInput + 1);
-				System.out.println("Your number is: "+ intInput);
+					doubleInput = parseStuff.nextDouble();
+					intInput = ((int) doubleInput + 1);
+					System.out.println("Your number is: "+ intInput);
 				}
 				parseStuff.close(); 
 			}
-			
-		} System.out.println("Your number incremented by 1 is: " + intInput);
+
+		} 
+		//call our do-work methods to actually do the incrementation
+		//array first
+		IntArray intArray = new IntArray(intInput);
+		//then send it through ReCurses
+		if (intInput >= 0 ) {
+			newNumber = ReCurses.ReCurse(intArray.disArray());
+		} else {
+			newNumber = ReCurses.ReCurseNeg(intArray.disArray());
+		}
+		// finally the Stringify method
+		endResult = Stringify.StringifyIt(newNumber);
+
+		System.out.println("Your number incremented by 1 is: " + endResult);
 		scnr.close();
 	} 
 }
